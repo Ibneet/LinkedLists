@@ -110,8 +110,6 @@ node* insertNewNode(node* linkedList)
             tail = temp1;
     }
     
-    printf("The last node is %d \n",tail->data);
-    
     printf("Do you want to insert any new node, \n* If yes press 1 \n* If no press any key\n");
     scanf("%d",&a);
     
