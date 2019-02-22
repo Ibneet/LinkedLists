@@ -78,6 +78,10 @@ void createQueues(int n,int q)
         scanf("%d",&x);
         temp1 = index[x-1];
     
+        if( temp1->next == NULL )
+            temp1->next = newNode;
+        else
+        {
         while( temp1->next != NULL)
         {
             temp1 = temp1->next;
@@ -85,6 +89,7 @@ void createQueues(int n,int q)
                 rear = temp1;
         }
         rear->next = newNode;
+        }
     
         printf("This is the updated queue\n");
         display(index[x-1]);
