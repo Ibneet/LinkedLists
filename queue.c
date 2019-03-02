@@ -65,46 +65,59 @@ void createQueues(int n,int q)
         printf("This is queue %d\n",i+1);
         display(index[i]);
     }
-    printf("Do you want to get into the queue:\nPress 1 if yes and press any other key if not.\n");
-    scanf("%d",&b);
-    
-    if(b==1)
+    while(1)
     {
-        newNode = (node*)malloc(sizeof(node));
-        printf("Enter the data to the new node: ");
-        scanf("%d" ,&(newNode->data));
-        newNode->next = NULL;
-        printf("In which queue you want to go: ");
-        scanf("%d",&x);
-        temp1 = index[x-1];
-    
-        if( temp1->next == NULL )
-            temp1->next = newNode;
-        else
-        {
-        while( temp1->next != NULL)
-        {
-            temp1 = temp1->next;
-            if( temp1->next == NULL)
-                rear = temp1;
+        printf("What you want to do next:\nPress 1 if you want to get into the queue\nPress 2 if you want to get something from the queue\nPress 3 to exit from the program\n");
+        scanf("%d",&b);
+        
+        switch (b) {
+            case 1:
+                newNode = (node*)malloc(sizeof(node));
+                printf("Enter the data to the new node: ");
+                scanf("%d" ,&(newNode->data));
+                newNode->next = NULL;
+                printf("In which queue you want to go: ");
+                scanf("%d",&x);
+                temp1 = index[x-1];
+                if(temp1 != NULL)
+                {
+                    if( temp1->next == NULL )
+                        temp1->next = newNode;
+                    
+                    else
+                    {
+                    while( temp1->next != NULL)
+                    {
+                        temp1 = temp1->next;
+                        if( temp1->next == NULL)
+                            rear = temp1;
+                    }
+                    rear->next = newNode;
+                    }
+                }
+                else
+                {
+                    temp1 = newNode;
+                    index[x-1] = temp1;
+                }
+            
+                printf("This is the updated queue %d\n",x);
+                display(index[x-1]);
+                break;
+            case 2:
+                printf("From which queue do you want to get the number: ");
+                scanf("%d",&x);
+                deleteNode(index[x-1]);
+                index[x-1]=index[x-1]->next;
+                break;
+            case 3:
+                exit(0);
+            default:
+                break;
         }
-        rear->next = newNode;
-        }
-    
-        printf("This is the updated queue\n");
-        display(index[x-1]);
-    }
-    else
-        printf("No new member is coming");
-    printf("Do you want to take a number from the queue:\nPress 1 if yes and press any other number if not.\n");
-    scanf("%d",&c);
-    if(c==1)
-    {
-        printf("From which queue do you want to get the number: ");
-        scanf("%d",&x);
-        deleteNode(index[x-1]);
     }
 }
+    
 
 //*********************************************************************
 
